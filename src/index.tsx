@@ -3,13 +3,30 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {QueryClient, QueryClientProvider} from "react-query";
+import {RecoilRoot} from "recoil";
+
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus:false
+        }
+    }
+})
+
 root.render(
   <React.StrictMode>
-    <App />
+      <RecoilRoot>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+      </RecoilRoot>
   </React.StrictMode>
 );
 
